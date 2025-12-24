@@ -39,7 +39,9 @@ jobs:
 
     # 4. Build the EXE
     - name: 🔨 Build Release
-      run: cargo build --release --verbose
+      run: |
+        cd i2a
+        cargo build --release --verbose
 
     # 5. Create a Version Tag
     # Generates a version like v1.0.45 based on the run number
@@ -55,7 +57,7 @@ jobs:
     - name: 📦 Create Zip Package
       run: |
         mkdir release
-        copy target/release/i2a.exe release/
+        copy i2a/target/release/i2a.exe release/
         copy README.md release/
         Compress-Archive -Path release/* -DestinationPath i2a_windows_x64.zip
       shell: powershell
@@ -79,4 +81,5 @@ jobs:
         draft: false
         prerelease: false
       env:
+
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
