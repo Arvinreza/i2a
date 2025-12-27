@@ -1,0 +1,5 @@
+target/
+emissary-core/fuzz/target
+emissary-core/fuzz/artifacts
+emissary-core/fuzz/corpus
+docs/node_modules
