@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web console</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+            display: flex;
+            height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #2f3542;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tab:hover,
+        .tab.active {
+            background-color: #57606f;
+        }
+
+        .toggle-theme {
+            margin-top: auto;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #57606f;
+            border: none;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        .metric {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        .metric span {
+            font-weight: bold;
+            color: #2f3542;
+        }
+
+        .dark-mode {
+            background-color: #1e1e2f;
+            color: #eee;
+        }
+
+        .dark-mode .sidebar {
+            background-color: #181825;
+            color: #ddd;
+        }
+
+        .dark-mode .tab:hover,
+        .dark-mode .tab.active {
+            background-color: #3a3a5c;
+        }
+
+        .dark-mode .toggle-theme {
+            background-color: #3a3a5c;
+        }
+
+        .dark-mode .metric span {
+            color: #dcdcdc;
+        }
+
+        .dark-mode .content {
+            background-color: #1e1e2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Web console</h2>
+        <div class="tab active" data-tab="status">Overview</div>
+        <div class="tab" data-tab="destination">Destination</div>
+        <button class="toggle-theme">Dark mode</button>
+    </div>
+
+    <div class="content">
+        <div class="panel active" id="status">
+            <h1>Overview</h1>
+            <div class="metric"><span id="uptime"></span></div>
+            <div class="metric"><span id="routerStatus"></span></div>
+            <div class="metric"><span id="bandwidth"></span></div>
+            <div class="metric"><span id="numRouters"></span></div>
+            <div class="metric"><span id="tunnelBuildRatio"></span></div>
+            <div class="metric"><span id="numTransitTunnels"></span></div>
+            <div class="metric"><span id="transitBandwidth"></span></div>
+            <button id="gracefulShutdownBtn">Graceful shutdown</button>
+            <button id="forcefulShutdownBtn">Forceful shutdown</button>
+        </div>
+
+        <div class="panel" id="destination">
+            <h1>Server destinations</h1>
+            <div id="serverDestinations"></div>
+            <h1>Client destinations</h1>
+            <div id="clientDestinations"></div>
+        </div>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const panels = document.querySelectorAll('.panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        const socket = new WebSocket("ws://" + location.host + "/ws");
+        socket.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+
+            document.getElementById("routerStatus").textContent = data.status;
+            document.getElementById("uptime").textContent = data.uptime;
+            document.getElementById("bandwidth").textContent = data.bandwidth;
+            document.getElementById("numRouters").textContent = data.num_routers;
+            document.getElementById("numTransitTunnels").textContent = data.num_transit_tunnels;
+            document.getElementById("tunnelBuildRatio").textContent = data.tunnel_build_ratio;
+            document.getElementById("transitBandwidth").textContent = data.transit_bandwidth;
+
+            if (data.server_destinations && Array.isArray(data.server_destinations)) {
+                const destContainer = document.getElementById("serverDestinations");
+                destContainer.innerHTML = ""; // Clear previous entries
+
+                data.server_destinations.forEach(([key, value]) => {
+                    const div = document.createElement("div");
+                    div.textContent = `${key}: http://${value}.b32.i2p`;
+                    destContainer.appendChild(div);
+                });
+            }
+
+            if (data.client_destinations && Array.isArray(data.client_destinations)) {
+                const destContainer = document.getElementById("clientDestinations");
+                destContainer.innerHTML = ""; // Clear previous content
+
+                data.client_destinations.forEach(dest => {
+                    const div = document.createElement("div");
+                    div.textContent = dest;
+                    destContainer.appendChild(div);
+                });
+            }
+        };
+
+        const themeToggleBtn = document.querySelector(".toggle-theme");
+        const root = document.body;
+
+        function applyTheme(dark) {
+            if (dark) {
+                root.classList.add("dark-mode");
+                localStorage.setItem("theme", "dark");
+                themeToggleBtn.textContent = "Light Mode";
+            } else {
+                root.classList.remove("dark-mode");
+                localStorage.setItem("theme", "light");
+                themeToggleBtn.textContent = "Dark Mode";
+            }
+        }
+
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+            applyTheme(true);
+        }
+
+        themeToggleBtn.addEventListener("click", () => {
+            const isDark = root.classList.contains("dark-mode");
+            applyTheme(!isDark);
+        });        
+
+        document.getElementById("forcefulShutdownBtn").addEventListener("click", () => {
+            const msg = {
+                type: "command",
+                action: "forceful_shutdown"
+            };
+            socket.send(JSON.stringify(msg));
+        });
+
+        document.getElementById("gracefulShutdownBtn").addEventListener("click", () => {
+            const msg = {
+                type: "command",
+                action: "graceful_shutdown"
+            };
+            socket.send(JSON.stringify(msg));
+        });
+    </script>
+</body>
+</html>
