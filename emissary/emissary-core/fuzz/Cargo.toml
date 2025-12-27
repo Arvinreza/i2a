@@ -1,0 +1,52 @@
+[package]
+name = "emissary-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+arbitrary = { version = "1", features = ["derive"] }
+emissary-core = { path = "../", features = ["std"] }
+emissary-util = { path = "../../emissary-util", features = ["tokio"] }
+libfuzzer-sys = "0.4.0"
+rand_core = { version = "0.6.4", features = ["alloc", "getrandom"] }
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[profile.release]
+debug = 1
+
+[[bin]]
+name = "short_tunnel_build_builder"
+path = "fuzz_targets/short_tunnel_build_builder.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "i2np_message_builder"
+path = "fuzz_targets/i2np_message_builder.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "tunnel_data_builder"
+path = "fuzz_targets/tunnel_data_builder.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "i2np"
+path = "fuzz_targets/i2np.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "primitives"
+path = "fuzz_targets/primitives.rs"
+test = false
+doc = false
